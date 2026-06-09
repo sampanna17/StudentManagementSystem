@@ -1,7 +1,7 @@
 package com.studentmanagementsystem.model;
 
 public class Student {
-    private int student_id;
+    private final int student_id;
     private String student_name;
     private int marks;
     private String grade;
