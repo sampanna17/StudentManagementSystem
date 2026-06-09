@@ -21,6 +21,10 @@ public class StudentService {
         return repo.getALl();
     }
 
+    public Optional<Student> getStudentById(int student_id){
+        return repo.findById(student_id);
+    }
+
     // Update Marks Logic
     public void updateMarks(int student_id, int marks){
         Optional<Student> student = repo.findById(student_id);
