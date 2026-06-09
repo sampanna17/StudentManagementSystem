@@ -1,10 +1,13 @@
 package com.studentmanagementsystem.model;
 
 public class Student {
-    private final int student_id;
+    private int student_id;
     private String student_name;
     private int marks;
     private String grade;
+
+    public Student() {
+    }
 
     public Student(int student_id, String student_name, int marks){
         this.student_id = student_id;
@@ -21,8 +24,8 @@ public class Student {
         else return "F";
     }
 
-    public int getId() {return student_id; }
-    public String getName() {return student_name;}
+    public int getStudent_id() {return student_id; }
+    public String getStudent_name() {return student_name;}
     public int getMarks() {return marks;}
     public String getGrade() {return grade;}
 

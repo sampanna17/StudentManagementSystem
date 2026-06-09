@@ -3,7 +3,6 @@ package com.studentmanagementsystem.repository;
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.util.FileStorage;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,11 +19,11 @@ public class StudentRepository {
     }
 
     public Optional<Student> findById(int student_id){
-        return students.stream().filter(s -> s.getId() == student_id).findFirst();
+        return students.stream().filter(s -> s.getStudent_id() == student_id).findFirst();
     }
 
     public void delete(int student_id){
-        students.removeIf(s -> s.getId() == student_id
+        students.removeIf(s -> s.getStudent_id() == student_id
         );
         FileStorage.write(students);
     }

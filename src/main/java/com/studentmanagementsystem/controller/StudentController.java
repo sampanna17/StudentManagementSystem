@@ -24,6 +24,7 @@ public class StudentController {
             System.out.println("7. Sort By Student Marks");
             System.out.println("8. Top Student");
             System.out.println("0. Exit");
+            System.out.println("==========================================");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -36,7 +37,7 @@ public class StudentController {
                 case 5 -> delete();
                 case 6 -> view(service.sortByName());
                 case 7 -> view(service.sortByMarks());
-                case 8 -> System.out.println(service.topStudent());
+                case 8 -> view(java.util.List.of(service.topStudent()));
                 case 0 -> System.exit(0);
             }
         }
@@ -79,7 +80,6 @@ public class StudentController {
     }
 
     private void view(java.util.List<?> list) {
-
         System.out.println("-----------------------------------------------");
         System.out.printf("%-5s | %-20s | %-5s | %-5s%n",
                 "ID", "Name", "Marks", "Grade");

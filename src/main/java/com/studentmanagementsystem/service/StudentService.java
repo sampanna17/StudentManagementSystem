@@ -38,7 +38,7 @@ public class StudentService {
 
     public List<Student> sortByName(){
         return repo.getALl().stream()
-                .sorted(Comparator.comparing(Student::getName))
+                .sorted(Comparator.comparing(Student::getStudent_name))
                 .toList();
     }
 
