@@ -38,6 +38,12 @@ public class StudentService {
                 .toList();
     }
 
+    public List<Student> sortByMarks(){
+        return repo.getALl().stream()
+                .sorted(Comparator.comparing(Student::getMarks).reversed())
+                .toList();
+    }
+
     public Student topStudent(){
         return repo.getALl().stream()
                 .max(Comparator.comparing(Student::getMarks))
