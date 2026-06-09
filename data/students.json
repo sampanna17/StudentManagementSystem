@@ -1,0 +1,11 @@
+[ {
+  "marks" : 80,
+  "grade" : "A",
+  "name" : "Sampanna Piya",
+  "id" : 1
+}, {
+  "marks" : 80,
+  "grade" : "A",
+  "name" : "Simran Piya",
+  "id" : 2
+} ]

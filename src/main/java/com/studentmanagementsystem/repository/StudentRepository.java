@@ -1,15 +1,18 @@
 package com.studentmanagementsystem.repository;
 
 import com.studentmanagementsystem.model.Student;
+import com.studentmanagementsystem.util.FileStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class StudentRepository {
-    private final List<Student> students = new ArrayList<>();
+    private final List<Student> students = FileStorage.read();
 
     public void add(Student student){
         students.add(student);
+        FileStorage.write(students);
     }
 
     public List<Student> getALl(){
@@ -23,6 +26,7 @@ public class StudentRepository {
     public void delete(int student_id){
         students.removeIf(s -> s.getId() == student_id
         );
+        FileStorage.write(students);
     }
 
 }
