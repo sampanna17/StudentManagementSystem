@@ -55,10 +55,8 @@ public class StudentController {
     }
 
     private void update(){
-        System.out.print("ID : ");
-        int student_id =  sc.nextInt();
-        System.out.print("New Marks : ");
-        int marks = sc.nextInt();
+        int student_id = InputUtil.readInt("ID : ", sc);
+        int marks = InputUtil.readInt("New Marks : ", sc);
 
         service.updateMarks(student_id, marks);
     }
@@ -81,7 +79,15 @@ public class StudentController {
     }
 
     private void view(java.util.List<?> list) {
+
+        System.out.println("-----------------------------------------------");
+        System.out.printf("%-5s | %-20s | %-5s | %-5s%n",
+                "ID", "Name", "Marks", "Grade");
+        System.out.println("-----------------------------------------------");
+
         list.forEach(System.out::println);
+
+        System.out.println("-----------------------------------------------");
     }
 
 }

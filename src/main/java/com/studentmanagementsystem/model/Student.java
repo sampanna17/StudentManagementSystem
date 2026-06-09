@@ -33,7 +33,13 @@ public class Student {
 
     @Override
     public String toString(){
-        return "ID : " + student_id + " | Name : " + student_name + " | Marks : " + marks + " | Grade: " + grade;
+        return String.format(
+                "%-5d | %-20s | %-5d | %-2s",
+                student_id,
+                student_name,
+                marks,
+                grade
+        );
     }
 
 }
