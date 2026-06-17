@@ -1,19 +1,21 @@
 package com.studentmanagementsystem.controller;
 
+import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.service.StudentService;
 import com.studentmanagementsystem.util.ExceptionHandler;
 import com.studentmanagementsystem.util.InputUtil;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentController {
 
     private final StudentService service = new StudentService();
-    private final Scanner sc = new  Scanner(System.in);
+    private final Scanner sc = new Scanner(System.in);
 
-    public void start(){
+    public void start() {
 
-        while (true){
+        while (true) {
             System.out.println("\n====== STUDENT MANAGEMENT SYSTEM ========");
             System.out.println("1. Add Student");
             System.out.println("2. View All Students");
@@ -24,10 +26,17 @@ public class StudentController {
             System.out.println("7. Sort By Student Marks");
             System.out.println("8. Top Student");
             System.out.println("0. Exit");
-            System.out.println("==========================================");
+            System.out.println("========================================");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            System.out.print("Select the number from the menu : ");
+            int choice;
+
+            try {
+                choice = Integer.parseInt(sc.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a number from menu.");
+                continue;
+            }
 
             switch (choice) {
                 case 1 -> add();
@@ -37,49 +46,68 @@ public class StudentController {
                 case 5 -> delete();
                 case 6 -> view(service.sortByName());
                 case 7 -> view(service.sortByMarks());
-                case 8 -> view(java.util.List.of(service.topStudent()));
+                case 8 -> view(List.of(service.topStudent()));
                 case 0 -> System.exit(0);
+                default -> System.out.println("Invalid choice! Please select number from menu.");
             }
         }
     }
 
-    private void add(){
-        try{
-            int student_id = InputUtil.readInt("ID : ", sc);
-            String student_name = InputUtil.readString("Name : ", sc);
+    // CREATE UI
+    private void add() {
+        try {
+            int id = InputUtil.readInt("ID : ", sc);
+            String name = InputUtil.readString("Name : ", sc);
             int marks = InputUtil.readInt("Marks : ", sc);
 
-            service.addStudent(student_id, student_name, marks);
-        } catch (Exception e){
+            service.addStudent(id, name, marks);
+
+        } catch (Exception e) {
             ExceptionHandler.handle(e);
         }
     }
 
-    private void update(){
-        int student_id = InputUtil.readInt("ID : ", sc);
-        int marks = InputUtil.readInt("New Marks : ", sc);
+    // READ BY ID UI
+    private void viewById() {
+        try {
+            int id = InputUtil.readInt("ID : ", sc);
 
-        service.updateMarks(student_id, marks);
+            Student student = service.getStudentById(id);
+
+            view(List.of(student));
+
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
     }
 
-    private void viewById(){
-        System.out.print("ID : ");
-        int student_id = Integer.parseInt(sc.nextLine().trim());
+    // UPDATE UI
+    private void update() {
+        try {
+            int id = InputUtil.readInt("ID : ", sc);
+            int marks = InputUtil.readInt("New Marks : ", sc);
 
-        service.getStudentById(student_id)
-                .ifPresentOrElse(student -> view(java.util.List.of(student)),
-                        () -> System.out.println("Student Not found")
-                );
+            service.updateMarks(id, marks);
+
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
     }
 
-    private void delete(){
-        System.out.print("ID : ");
-        int student_id = sc.nextInt();
+    // DELETE UI
+    private void delete() {
+        try {
+            int id = InputUtil.readInt("ID : ", sc);
 
-        service.deleteStudent(student_id);
+            service.deleteStudent(id);
+
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
     }
 
-    private void view(java.util.List<?> list) {
+    // PRINT TABLE
+    private void view(List<Student> list) {
         System.out.println("-----------------------------------------------");
         System.out.printf("%-5s | %-20s | %-5s | %-5s%n",
                 "ID", "Name", "Marks", "Grade");
@@ -89,5 +117,4 @@ public class StudentController {
 
         System.out.println("-----------------------------------------------");
     }
-
 }

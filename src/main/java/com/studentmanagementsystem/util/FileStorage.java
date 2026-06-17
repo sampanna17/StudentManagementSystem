@@ -11,7 +11,7 @@ import java.util.List;
 public class FileStorage {
 
     private static final String FILE_PATH = "data/students.json";
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper(); // Object
 
     // READ
     public static List<Student> read() {

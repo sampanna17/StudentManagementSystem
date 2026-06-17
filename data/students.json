@@ -8,4 +8,9 @@
   "student_name" : "Simran",
   "marks" : 30,
   "grade" : "F"
+}, {
+  "student_id" : 3,
+  "student_name" : "Hari Lama",
+  "marks" : 40,
+  "grade" : "D"
 } ]

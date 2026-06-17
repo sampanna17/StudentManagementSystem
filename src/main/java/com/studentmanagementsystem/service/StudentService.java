@@ -3,56 +3,66 @@ package com.studentmanagementsystem.service;
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.repository.StudentRepository;
 
-import java.util.List;
 import java.util.Comparator;
-import java.util.Optional;
+import java.util.List;
 
 public class StudentService {
 
     private final StudentRepository repo = new StudentRepository();
 
-    // Add Student Logic
-    public void addStudent(int student_id, String student_name, int marks){
-        repo.add(new Student(student_id,student_name,marks));
+    // CREATE
+    public void addStudent(int id, String name, int marks) {
+        repo.add(new Student(id, name, marks));
     }
 
-    // Get All Student Logic
-    public List<Student> getAllStudents(){
+    // READ ALL
+    public List<Student> getAllStudents() {
         return repo.getALl();
     }
 
-    public Optional<Student> getStudentById(int student_id){
-        return repo.findById(student_id);
+    // READ ONE
+    public Student getStudentById(int id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
     }
 
-    // Update Marks Logic
-    public void updateMarks(int student_id, int marks){
-        Optional<Student> student = repo.findById(student_id);
-        student.ifPresent(s -> s.setMarks(marks));
+    // UPDATE
+    public void updateMarks(int id, int marks) {
+        Student student = getStudentById(id);
+        student.setMarks(marks);
     }
 
-    // Delete Student Logic
-    public void deleteStudent(int student_id){
-        repo.delete(student_id);
+    // DELETE
+    public void deleteStudent(int id) {
+
+        boolean exists = repo.getALl().stream()
+                .anyMatch(s -> s.getStudent_id() == id);
+
+        if (!exists) {
+            throw new RuntimeException("Student not found with id: " + id);
+        }
+
+        repo.delete(id);
     }
 
-    public List<Student> sortByName(){
+    // SORT BY NAME
+    public List<Student> sortByName() {
         return repo.getALl().stream()
                 .sorted(Comparator.comparing(Student::getStudent_name))
                 .toList();
     }
 
-    public List<Student> sortByMarks(){
+    // SORT BY MARKS
+    public List<Student> sortByMarks() {
         return repo.getALl().stream()
                 .sorted(Comparator.comparing(Student::getMarks).reversed())
                 .toList();
     }
 
-    public Student topStudent(){
+    // TOP STUDENT
+    public Student topStudent() {
         return repo.getALl().stream()
                 .max(Comparator.comparing(Student::getMarks))
-                .orElse(null);
+                .orElseThrow(() -> new RuntimeException("No students found"));
     }
-
 }
-
