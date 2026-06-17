@@ -20,12 +20,12 @@ public class StudentController {
             System.out.println("1. Add Student");
             System.out.println("2. View All Students");
             System.out.println("3. View By Student ID");
-            System.out.println("4. Update Marks");
-            System.out.println("5. Delete Student");
-            System.out.println("6. Sort By Student Name");
-            System.out.println("7. Sort By Student Marks");
-            System.out.println("8. Top Student");
-            System.out.println("9. Grade Wise Student Count");
+            System.out.println("4. Update Student Name & ID");
+            System.out.println("5. Update Marks");
+            System.out.println("6. Delete Student");
+            System.out.println("7. Sort By Student Name");
+            System.out.println("8. Sort By Student Marks");
+            System.out.println("9. Top Student");
             System.out.println("0. Exit");
             System.out.println("========================================");
 
@@ -43,12 +43,13 @@ public class StudentController {
                 case 1 -> add();
                 case 2 -> view(service.getAllStudents());
                 case 3 -> viewById();
-                case 4 -> update();
-                case 5 -> delete();
-                case 6 -> view(service.sortByName());
-                case 7 -> view(service.sortByMarks());
-                case 8 -> view(List.of(service.topStudent()));
-                case 9 -> gradeWiseCount();
+                case 4 -> updateStudent();
+                case 5 -> update();
+                case 6 -> delete();
+                case 7 -> view(service.sortByName());
+                case 8 -> view(service.sortByMarks());
+                case 9 -> view(List.of(service.topStudent()));
+                case 10 -> gradeWiseCount();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Invalid choice! Please select number from menu.");
             }
@@ -91,6 +92,41 @@ public class StudentController {
             int marks = InputUtil.readInt("New Marks : ", sc);
 
             service.updateMarks(id, marks);
+
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
+    }
+
+    //Update Student ID and Name
+    private void updateStudent() {
+
+        try {
+
+            int oldId = InputUtil.readInt(
+                    "Current ID : ",
+                    sc
+            );
+
+            int newId = InputUtil.readInt(
+                    "New ID : ",
+                    sc
+            );
+
+            String newName = InputUtil.readString(
+                    "New Name : ",
+                    sc
+            );
+
+            service.updateStudent(
+                    oldId,
+                    newId,
+                    newName
+            );
+
+            System.out.println(
+                    "Student updated successfully."
+            );
 
         } catch (Exception e) {
             ExceptionHandler.handle(e);

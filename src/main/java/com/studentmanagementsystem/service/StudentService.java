@@ -7,6 +7,7 @@ import com.studentmanagementsystem.exception.CustomException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StudentService {
@@ -15,11 +16,19 @@ public class StudentService {
 
     // CREATE
     public void addStudent(int id, String name, int marks) {
-        if (repo.existsById(id)) {
+
+        Set<Integer> ids =
+                repo.getALl()
+                        .stream()
+                        .map(Student::getStudent_id)
+                        .collect(Collectors.toSet());
+
+        if (ids.contains(id)) {
             throw new CustomException.DuplicateIdException(
                     "Student already exists with id: " + id
             );
         }
+
         repo.add(new Student(id, name, marks));
     }
 
@@ -86,5 +95,31 @@ public class StudentService {
                                 Collectors.counting()
                         )
                 );
+    }
+
+    //Update Student Details
+    public void updateStudent(int oldId, int newId, String newName) {
+
+        Map<Integer, Student> studentMap = repo.getALl()
+                .stream()
+                .collect(Collectors.toMap(
+                        Student::getStudent_id,
+                        student -> student
+                ));
+
+        Student student = studentMap.get(oldId);
+
+        if (student == null) {
+            throw new RuntimeException("Student not found with id: " + oldId);
+        }
+
+        if (oldId != newId && studentMap.containsKey(newId)) {
+            throw new RuntimeException("Student already exists with id: " + newId);
+        }
+
+        student.setStudent_id(newId);
+        student.setStudent_name(newName);
+
+        repo.saveChanges();
     }
 }

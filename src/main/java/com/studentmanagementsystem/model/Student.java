@@ -34,6 +34,14 @@ public class Student {
         this.grade = calculateGrade(marks);
     }
 
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
     @Override
     public String toString(){
         return String.format(

@@ -14,6 +14,10 @@ public class StudentRepository {
         FileStorage.write(students);
     }
 
+    public void saveChanges() {
+        FileStorage.write(students);
+    }
+
     public List<Student> getALl(){
         return students;
     }

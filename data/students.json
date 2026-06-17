@@ -5,7 +5,7 @@
   "grade" : "F"
 }, {
   "student_id" : 2,
-  "student_name" : "Simran",
+  "student_name" : "Sita Shrestha",
   "marks" : 30,
   "grade" : "F"
 }, {
@@ -13,4 +13,9 @@
   "student_name" : "Hari Lama",
   "marks" : 40,
   "grade" : "D"
+}, {
+  "student_id" : 4,
+  "student_name" : "Rohan Shrestha",
+  "marks" : 98,
+  "grade" : "A"
 } ]
