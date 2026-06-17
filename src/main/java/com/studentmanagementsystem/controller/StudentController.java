@@ -53,7 +53,7 @@ public class StudentController {
         }
     }
 
-    // CREATE UI
+    // Add Student UI
     private void add() {
         try {
             int id = InputUtil.readInt("ID : ", sc);

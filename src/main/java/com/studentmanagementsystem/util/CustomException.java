@@ -18,4 +18,10 @@ public class CustomException {
             super(message);
         }
     }
+
+    public static class DuplicateIdException extends RuntimeException {
+        public DuplicateIdException(String message) {
+            super(message);
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.studentmanagementsystem.service;
 
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.repository.StudentRepository;
+import com.studentmanagementsystem.util.CustomException;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +13,11 @@ public class StudentService {
 
     // CREATE
     public void addStudent(int id, String name, int marks) {
+        if (repo.existsById(id)) {
+            throw new CustomException.DuplicateIdException(
+                    "Student already exists with id: " + id
+            );
+        }
         repo.add(new Student(id, name, marks));
     }
 

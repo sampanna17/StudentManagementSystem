@@ -35,4 +35,9 @@ public class StudentRepository {
         return removed;
     }
 
+    public boolean existsById(int id) {
+        return students.stream()
+                .anyMatch(s -> s.getStudent_id() == id);
+    }
+
 }
