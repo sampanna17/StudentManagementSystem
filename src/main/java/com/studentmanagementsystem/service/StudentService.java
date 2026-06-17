@@ -2,7 +2,7 @@ package com.studentmanagementsystem.service;
 
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.repository.StudentRepository;
-import com.studentmanagementsystem.util.CustomException;
+import com.studentmanagementsystem.exception.CustomException;
 
 import java.util.Comparator;
 import java.util.List;

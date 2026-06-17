@@ -2,8 +2,8 @@ package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.service.StudentService;
-import com.studentmanagementsystem.util.ExceptionHandler;
-import com.studentmanagementsystem.util.InputUtil;
+import com.studentmanagementsystem.exception.ExceptionHandler;
+import com.studentmanagementsystem.exception.InputUtil;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package com.studentmanagementsystem.util;
+package com.studentmanagementsystem.exception;
 
 import java.util.Scanner;
 

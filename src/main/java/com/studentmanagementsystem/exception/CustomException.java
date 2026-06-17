@@ -1,4 +1,4 @@
-package com.studentmanagementsystem.util;
+package com.studentmanagementsystem.exception;
 
 public class CustomException {
     public static class EmptyFieldException extends RuntimeException {
