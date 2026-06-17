@@ -6,6 +6,8 @@ import com.studentmanagementsystem.exception.CustomException;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class StudentService {
 
@@ -71,5 +73,18 @@ public class StudentService {
         return repo.getALl().stream()
                 .max(Comparator.comparing(Student::getMarks))
                 .orElseThrow(() -> new RuntimeException("No students found"));
+    }
+
+    //Count Students by Grade
+    public Map<String, Long> getGradeWiseStudentCount() {
+
+        return repo.getALl()
+                .stream()
+                .collect(
+                        Collectors.groupingBy(
+                                Student::getGrade,
+                                Collectors.counting()
+                        )
+                );
     }
 }

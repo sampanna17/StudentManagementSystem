@@ -25,6 +25,7 @@ public class StudentController {
             System.out.println("6. Sort By Student Name");
             System.out.println("7. Sort By Student Marks");
             System.out.println("8. Top Student");
+            System.out.println("9. Grade Wise Student Count");
             System.out.println("0. Exit");
             System.out.println("========================================");
 
@@ -47,6 +48,7 @@ public class StudentController {
                 case 6 -> view(service.sortByName());
                 case 7 -> view(service.sortByMarks());
                 case 8 -> view(List.of(service.topStudent()));
+                case 9 -> gradeWiseCount();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Invalid choice! Please select number from menu.");
             }
@@ -82,7 +84,7 @@ public class StudentController {
         }
     }
 
-    // UPDATE UI
+    // UPDATE Marks UI
     private void update() {
         try {
             int id = InputUtil.readInt("ID : ", sc);
@@ -95,7 +97,7 @@ public class StudentController {
         }
     }
 
-    // DELETE UI
+    // DELETE Student Data UI
     private void delete() {
         try {
             int id = InputUtil.readInt("ID : ", sc);
@@ -106,6 +108,25 @@ public class StudentController {
         } catch (Exception e) {
             ExceptionHandler.handle(e);
         }
+    }
+
+    private void gradeWiseCount() {
+
+        System.out.println("-------------------------");
+        System.out.printf("%-10s | %-10s%n",
+                "Grade",
+                "Count");
+        System.out.println("-------------------------");
+
+        service.getGradeWiseStudentCount()
+                .forEach((grade, count) ->
+                        System.out.printf(
+                                "%-10s | %-10d%n",
+                                grade,
+                                count
+                        ));
+
+        System.out.println("-------------------------");
     }
 
     // PRINT TABLE
