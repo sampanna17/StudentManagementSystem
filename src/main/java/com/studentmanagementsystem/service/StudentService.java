@@ -122,4 +122,12 @@ public class StudentService {
 
         repo.saveChanges();
     }
+
+    //Get Total Students
+    public long getTotalPassStudents() {
+        return repo.getALl()
+                .stream()
+                .filter(s -> s.getMarks() >= 40)
+                .count();
+    }
 }

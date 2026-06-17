@@ -26,6 +26,8 @@ public class StudentController {
             System.out.println("7. Sort By Student Name");
             System.out.println("8. Sort By Student Marks");
             System.out.println("9. Top Student");
+            System.out.println("10. Grade Wise Student Count");
+            System.out.println("11. Total Pass Student Count");
             System.out.println("0. Exit");
             System.out.println("========================================");
 
@@ -50,6 +52,7 @@ public class StudentController {
                 case 8 -> view(service.sortByMarks());
                 case 9 -> view(List.of(service.topStudent()));
                 case 10 -> gradeWiseCount();
+                case 11 -> showTotalPassCount();
                 case 0 -> System.exit(0);
                 default -> System.out.println("Invalid choice! Please select number from menu.");
             }
@@ -163,6 +166,17 @@ public class StudentController {
                         ));
 
         System.out.println("-------------------------");
+    }
+
+    // Total Student Count CLI
+    private void showTotalPassCount() {
+        try {
+            long count = service.getTotalPassStudents();
+            System.out.println("Total Passed Students : " + count);
+
+        } catch (Exception e) {
+            ExceptionHandler.handle(e);
+        }
     }
 
     // PRINT TABLE
