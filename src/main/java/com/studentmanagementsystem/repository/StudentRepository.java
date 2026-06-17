@@ -22,17 +22,13 @@ public class StudentRepository {
         return students.stream().filter(s -> s.getStudent_id() == student_id).findFirst();
     }
 
-    public boolean delete(int student_id){
+    public void delete(int student_id){
 
-        boolean removed = students.removeIf(
+        students.removeIf(
                 s -> s.getStudent_id() == student_id
         );
 
-        if (removed) {
-            FileStorage.write(students);
-        }
-
-        return removed;
+        FileStorage.write(students);
     }
 
     public boolean existsById(int id) {

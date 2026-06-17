@@ -3,7 +3,7 @@ package com.studentmanagementsystem.controller;
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.service.StudentService;
 import com.studentmanagementsystem.exception.ExceptionHandler;
-import com.studentmanagementsystem.exception.InputUtil;
+import com.studentmanagementsystem.util.InputUtil;
 
 import java.util.List;
 import java.util.Scanner;
@@ -61,6 +61,7 @@ public class StudentController {
             int marks = InputUtil.readInt("Marks : ", sc);
 
             service.addStudent(id, name, marks);
+            System.out.println("Student successfully Added with id: " + id);
 
         } catch (Exception e) {
             ExceptionHandler.handle(e);
@@ -100,6 +101,7 @@ public class StudentController {
             int id = InputUtil.readInt("ID : ", sc);
 
             service.deleteStudent(id);
+            System.out.println("Student deleted successfully with id: " + id);
 
         } catch (Exception e) {
             ExceptionHandler.handle(e);

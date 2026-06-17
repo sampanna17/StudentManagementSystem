@@ -1,4 +1,6 @@
-package com.studentmanagementsystem.exception;
+package com.studentmanagementsystem.util;
+
+import com.studentmanagementsystem.exception.CustomException;
 
 import java.util.Scanner;
 
