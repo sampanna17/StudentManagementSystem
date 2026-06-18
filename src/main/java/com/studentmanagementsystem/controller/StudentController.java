@@ -2,7 +2,7 @@ package com.studentmanagementsystem.controller;
 
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.service.StudentService;
-import com.studentmanagementsystem.exception.ExceptionHandler;
+import com.studentmanagementsystem.exception.GlobalExceptionHandler;
 import com.studentmanagementsystem.util.InputUtil;
 
 import java.util.List;
@@ -70,7 +70,7 @@ public class StudentController {
             System.out.println("Student successfully Added with id: " + id);
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
@@ -84,7 +84,7 @@ public class StudentController {
             view(List.of(student));
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
@@ -95,9 +95,12 @@ public class StudentController {
             int marks = InputUtil.readInt("New Marks : ", sc);
 
             service.updateMarks(id, marks);
+            System.out.println(
+                    "Student marks updated successfully."
+            );
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
@@ -129,7 +132,7 @@ public class StudentController {
             );
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
@@ -142,7 +145,7 @@ public class StudentController {
             System.out.println("Student deleted successfully with id: " + id);
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
@@ -172,7 +175,7 @@ public class StudentController {
             System.out.println("Total Passed Students : " + count);
 
         } catch (Exception e) {
-            ExceptionHandler.handle(e);
+            GlobalExceptionHandler.handle(e);
         }
     }
 
