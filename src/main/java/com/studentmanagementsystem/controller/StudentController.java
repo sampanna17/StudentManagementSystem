@@ -107,18 +107,15 @@ public class StudentController {
         try {
 
             int oldId = InputUtil.readInt(
-                    "Current ID : ",
-                    sc
+                    "Current ID : ", sc
             );
 
             int newId = InputUtil.readInt(
-                    "New ID : ",
-                    sc
+                    "New ID : ", sc
             );
 
             String newName = InputUtil.readString(
-                    "New Name : ",
-                    sc
+                    "New Name : ", sc
             );
 
             service.updateStudent(

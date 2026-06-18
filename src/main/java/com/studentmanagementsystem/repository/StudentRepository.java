@@ -35,9 +35,4 @@ public class StudentRepository {
         FileStorage.write(students);
     }
 
-    public boolean existsById(int id) {
-        return students.stream()
-                .anyMatch(s -> s.getStudent_id() == id);
-    }
-
 }
