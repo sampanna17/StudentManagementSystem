@@ -23,4 +23,9 @@
   "student_name" : "Kiran Poudel",
   "marks" : 50,
   "grade" : "C"
+}, {
+  "student_id" : 6,
+  "student_name" : "Aaloka",
+  "marks" : 99,
+  "grade" : "A"
 } ]
