@@ -1,38 +1,31 @@
 package com.studentmanagementsystem.util;
 
-import com.studentmanagementsystem.exception.CustomException;
+import com.studentmanagementsystem.exception.EmptyFieldException;
+import com.studentmanagementsystem.exception.InvalidInputException;
 
 import java.util.Scanner;
 
 public class InputUtil {
 
-    public static int readInt(String label, Scanner sc) {
+    public static String readString(String label, Scanner sc) {
         System.out.print(label);
+        return sc.nextLine().trim();
+    }
+
+    public static int readInt(String label, Scanner sc) {
+
+        System.out.print(label);
+
         String input = sc.nextLine().trim();
 
         if (input.isEmpty()) {
-            throw new CustomException.EmptyFieldException("Please enter the value in the field");
+            throw new EmptyFieldException("Field cannot be empty");
         }
 
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new CustomException.InvalidNumberException("Please input valid number");
+            throw new InvalidInputException("Please enter a valid number");
         }
-    }
-
-    public static String readString(String label, Scanner sc) {
-        System.out.print(label);
-        String input = sc.nextLine().trim();
-
-        if (input.isEmpty()) {
-            throw new CustomException.EmptyFieldException("Please enter the value in the field");
-        }
-
-        if (!input.matches("[a-zA-Z ]+")) {
-            throw new CustomException.InvalidTextException("Please input valid text");
-        }
-
-        return input;
     }
 }

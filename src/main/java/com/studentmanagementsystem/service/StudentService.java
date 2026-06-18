@@ -1,8 +1,10 @@
 package com.studentmanagementsystem.service;
 
+import com.studentmanagementsystem.exception.DuplicateStudentException;
+import com.studentmanagementsystem.exception.StudentNotFoundException;
 import com.studentmanagementsystem.model.Student;
 import com.studentmanagementsystem.repository.StudentRepository;
-import com.studentmanagementsystem.exception.CustomException;
+import com.studentmanagementsystem.util.ValidationUtil;
 
 import java.util.Comparator;
 import java.util.List;
@@ -24,10 +26,13 @@ public class StudentService {
                         .collect(Collectors.toSet());
 
         if (ids.contains(id)) {
-            throw new CustomException.DuplicateIdException(
+            throw new DuplicateStudentException(
                     "Student already exists with id: " + id
             );
         }
+
+        ValidationUtil.validateText(name);
+        ValidationUtil.validateMarks(marks);
 
         repo.add(new Student(id, name, marks));
     }
@@ -40,13 +45,14 @@ public class StudentService {
     // READ ONE
     public Student getStudentById(int id) {
         return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+                .orElseThrow(() -> new StudentNotFoundException("Student not found with id " + id));
     }
 
     // UPDATE
     public void updateMarks(int id, int marks) {
         Student student = getStudentById(id);
         student.setMarks(marks);
+        repo.saveChanges();
     }
 
     // DELETE
@@ -56,11 +62,10 @@ public class StudentService {
                 .anyMatch(s -> s.getStudent_id() == id);
 
         if (!exists) {
-            throw new RuntimeException("Student not found with id: " + id);
+            throw new StudentNotFoundException("Student not found with id: " + id);
         }
 
         repo.delete(id);
-
     }
 
     // SORT BY NAME
@@ -81,7 +86,7 @@ public class StudentService {
     public Student topStudent() {
         return repo.getALl().stream()
                 .max(Comparator.comparing(Student::getMarks))
-                .orElseThrow(() -> new RuntimeException("No students found"));
+                .orElseThrow(() -> new StudentNotFoundException("No students found"));
     }
 
     //Count Students by Grade
@@ -110,11 +115,11 @@ public class StudentService {
         Student student = studentMap.get(oldId);
 
         if (student == null) {
-            throw new RuntimeException("Student not found with id: " + oldId);
+            throw new StudentNotFoundException("Student not found with id: " + oldId);
         }
 
         if (oldId != newId && studentMap.containsKey(newId)) {
-            throw new RuntimeException("Student already exists with id: " + newId);
+            throw new DuplicateStudentException("Student already exists with id: " + newId);
         }
 
         student.setStudent_id(newId);
@@ -130,4 +135,5 @@ public class StudentService {
                 .filter(s -> s.getMarks() >= 40)
                 .count();
     }
+
 }
